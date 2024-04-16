@@ -7,8 +7,15 @@ if (!isset($_GET['pwlenght'])) {
   // if (!empty($_GET['pwlenght'])) $error = 'Errore';
 } else {
   $password = generateRandomString($_GET['pwlenght']);
-  // $error = "La Password e: " . $password;
+  // avvio la sessione
+  session_start();
+  // genero la password in sessione
+  $_SESSION['newpassword'] = $password;
+
+  // reindirizzo alla password.php
+  header('Location: ./password.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +39,6 @@ if (!isset($_GET['pwlenght'])) {
       <button class="btn btn-primary" type="submit">Richiedi password</button>
       <button class="btn btn-secondary ">Annulla richiesta</button>
     </form>
-    <span class=" text-danger">
-      <?php
-      echo "La password è:" . $password ?>
-    </span>
 
   </div>
 </body>
