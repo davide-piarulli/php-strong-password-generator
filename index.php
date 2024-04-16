@@ -1,3 +1,17 @@
+<?php
+function generateRandomString($length = 10)
+{
+  $letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $numbers = '0123456789';
+  $simboli = '!?&%$<>^+-*/()[]{}@#_=';
+  $characters = $letters . $numbers . $simboli;
+  $randomPassword = substr(str_shuffle($characters), 0, $length);
+
+  return $randomPassword;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,11 +25,16 @@
 
 <body>
   <div class="container">
+    <h1>Strong Password Generator</h1>
+    <h2>Genera una password sicura</h2>
     <form action="index.php" method="GET">
       <label for="pwlenght">Lunghezza password:</label>
-      <input type="number" name="pwlenght" id="pwlenght">
-      <button>Richiedi password</button>
+      <input type="number" name="pwlenght" id="pwlenght" placeholder="Scrivi un numero">
+      <button class="btn btn-primary" type="submit">Richiedi password</button>
+      <button class="btn btn-secondary ">Annulla richiesta</button>
     </form>
+    <?php $randomPassword = generateRandomString(15);
+    echo $randomPassword; ?>
   </div>
 </body>
 
