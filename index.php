@@ -1,17 +1,13 @@
 <?php
-function generateRandomString($length = 5)
-{
-  // credo 3 variabili per lettere, numeri e simboli
-  $letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  $numbers = '0123456789';
-  $simboli = '!?&%$<>^+-*/()[]{}@#_=';
-  // concateno le 3 stringhe in 1 sola
-  $characters = $letters . $numbers . $simboli;
-  // recupero la lunghezza richiesta inserita nell'input
-  $length = $_GET['pwlenght'];
-  $randomPassword = substr(str_shuffle($characters), 0, $length);
+require_once __DIR__ . '/data/functions.php';
+$password;
+// $error = '';
 
-  return $randomPassword;
+if (!isset($_GET['pwlenght'])) {
+  // if (!empty($_GET['pwlenght'])) $error = 'Errore';
+} else {
+  $password = generateRandomString($_GET['pwlenght']);
+  // $error = "La Password e: " . $password;
 }
 ?>
 
@@ -36,8 +32,11 @@ function generateRandomString($length = 5)
       <button class="btn btn-primary" type="submit">Richiedi password</button>
       <button class="btn btn-secondary ">Annulla richiesta</button>
     </form>
-    <?php $randomPassword = generateRandomString();
-    echo "La Password e: " . $randomPassword; ?>
+    <span class=" text-danger">
+      <?php
+      echo "La password è:" . $password ?>
+    </span>
+
   </div>
 </body>
 
